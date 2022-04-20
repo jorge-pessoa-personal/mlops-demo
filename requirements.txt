@@ -1,3 +1,5 @@
 scikit-learn 
 influxdb-client
+neptune-client
+neptune-sklearn
 flask

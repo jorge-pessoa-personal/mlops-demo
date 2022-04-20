@@ -1,6 +1,9 @@
 from sklearn.linear_model import PassiveAggressiveClassifier
 import numpy as np
 import pickle
+import os
+
+import neptune.new as neptune
 
 # --
 
@@ -13,9 +16,15 @@ y_test = np.load("dataset/y_test.npy")
 # --
 
 params = {
-	"max_iter": 5,
-	"loss": "hinge"
+ "max_iter": 100,
+ "loss": "hinge"
 }
+
+run = neptune.init(
+ project="demo",
+ api_token=os.environ["NEPTUNE_API_KEY"],
+ name="train-model-1"
+)
 
 clf = PassiveAggressiveClassifier(**params)
 
@@ -23,6 +32,10 @@ clf.fit(X_train, y_train)
 score = clf.score(X_test, y_test)
 
 with open("models/model.pkl", "wb") as fp:
-	pickle.dump(clf, fp)
+ pickle.dump(clf, fp)
+
+run["scores/score"] = score
+run["params"] = params
+run["pickled_model"].upload("models/model.pkl")
 
 print(score)
