@@ -2,4 +2,6 @@ scikit-learn
 influxdb-client
 neptune-client
 neptune-sklearn
+gunicorn
+pytest
 flask

@@ -1,11 +1,11 @@
-name: deploy model
+name: Deploy Model and Code
 
 on:
   push:
     branches: [main]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       # Check-out your repository.
@@ -26,3 +26,16 @@ jobs:
       
       - name: Deploy model
         run: python deploy.py
+        env:
+          NEPTUNE_API_KEY: ${{ secrets.NEPTUNE_API_KEY }}
+
+      - name: Build, Push and Release to Heroku
+        uses: gonuit/heroku-docker-deploy@v1.3.3
+        with:
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          dockerfile_directory: ./
+          dockerfile_name: Dockerfile
+          docker_options: "--no-cache"
+          process_type: web
