@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "mlops-demo"
+version = "0.1.0"
+description = ""
+authors = ["Jorge Pessoa"]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+scipy = "^1.8.0"
+scikit-learn = "^1.0.2"
+influxdb-client = "^1.28.0"
+neptune-client = "^0.16.1"
+neptune-sklearn = "^0.9.5"
+gunicorn = "^20.1.0"
+pytest = "^7.1.1"
+poetry = "^1.1.13"
+Flask = "^2.1.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
