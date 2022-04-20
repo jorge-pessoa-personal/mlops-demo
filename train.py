@@ -2,6 +2,7 @@ from sklearn.linear_model import PassiveAggressiveClassifier
 import numpy as np
 import pickle
 import os
+import uuid
 
 import neptune.new as neptune
 
@@ -20,10 +21,11 @@ params = {
  "loss": "hinge"
 }
 
+h = uuid.uuid4().hex[:5]
 run = neptune.init(
- project="demo",
+ project="mlops-demo",
  api_token=os.environ["NEPTUNE_API_KEY"],
- name="train-model-1"
+ name=f"model-train-{h}"
 )
 
 clf = PassiveAggressiveClassifier(**params)
