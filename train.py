@@ -17,7 +17,7 @@ y_test = np.load("dataset/y_test.npy")
 # --
 
 params = {
- "max_iter": 100,
+ "max_iter": 2,
  "loss": "hinge"
 }
 
